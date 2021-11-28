@@ -2,6 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import CreateIcon from '@material-ui/icons/Create';
+import SidebarOption from './SidebarOption/SidebarOption';
+import {
+  BookmarkBorder,
+  ExpandLess,
+  PeopleAlt,
+  InsertComment,
+  FileCopy,
+  Inbox,
+  Apps,
+  ExpandMore,
+  Add,
+} from '@material-ui/icons';
 
 function Sidebar() {
   return (
@@ -16,6 +28,20 @@ function Sidebar() {
         </SideBarInfo>
         <CreateIcon />
       </SideBarHeader>
+      <SidebarOption Icon={InsertComment} title="Threads" />
+      <SidebarOption Icon={Inbox} title="Mentions & reactions" />
+      <SidebarOption Icon={BookmarkBorder} title="Channel browser" />
+      <SidebarOption Icon={PeopleAlt} title="People and user groups" />
+      <SidebarOption Icon={Apps} title="Apps" />
+      <SidebarOption Icon={FileCopy} title="file browser" />
+      <SidebarOption Icon={ExpandLess} title="Show less" />
+      <hr />
+      <SidebarOption Icon={ExpandMore} title="Channels" />
+      <hr />
+      <SidebarOption Icon={Add} addChannelOption={true} title="Add channels" />
+      {/* {channels?.docs.map((doc) => (
+        <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
+      ))} */}
     </SidebarContainer>
   );
 }
@@ -29,6 +55,11 @@ const SidebarContainer = styled.div`
   border-top: 1px solid #49274b;
   max-width: 260px;
   margin-top: 60px;
+  > hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #49274b;
+  }
 `;
 
 const SideBarHeader = styled.div`

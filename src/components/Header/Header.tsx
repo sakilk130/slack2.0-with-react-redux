@@ -45,6 +45,10 @@ const HeaderLeft = styled.div`
   > .MuiSvgIcon-root {
     margin-left: auto;
     margin-right: 30px;
+    cursor: pointer;
+  }
+  > .MuiSvgIcon-root :hover {
+    opacity: 0.8;
   }
 `;
 
@@ -83,5 +87,9 @@ const HeaderRight = styled.div`
   > .MuiSvgIcon-root {
     margin-left: auto;
     margin-right: 20px;
+    cursor: pointer;
+  }
+  > .MuiSvgIcon-root:hover {
+    opacity: 0.8;
   }
 `;
