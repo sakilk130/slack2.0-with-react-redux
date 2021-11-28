@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import db from '../../../firebase/config';
 
 interface ISidebarOption {
   id?: string;
@@ -9,9 +10,22 @@ interface ISidebarOption {
 }
 
 function SidebarOption({ id, Icon, title, addChannelOption }: ISidebarOption) {
-  const addChannel = () => {};
+  const addChannel = () => {
+    const channelName = prompt('Please enter channel name');
+    if (!channelName) {
+      alert('Please enter channel name');
+    } else {
+      db.collection('rooms').add({
+        name: channelName,
+      });
+    }
+  };
+  const selectChannel = () => {};
+
   return (
-    <SidebarOptionContainer>
+    <SidebarOptionContainer
+      onClick={addChannelOption ? addChannel : selectChannel}
+    >
       {Icon && <Icon fontSize="small" style={{ padding: 10 }} />}
       {Icon ? (
         <h3>{title}</h3>
