@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 import db from '../../../firebase/config';
 import firebase from 'firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../../firebase/config';
 
 interface IChatInput {
   channelName?: any;
@@ -12,6 +14,7 @@ interface IChatInput {
 
 function ChatInput({ channelName, channelId, chatRef }: IChatInput) {
   const [input, setInput] = useState('');
+  const [user, loading] = useAuthState(auth);
 
   const sendMessage = (e: any) => {
     e.preventDefault();
@@ -21,8 +24,8 @@ function ChatInput({ channelName, channelId, chatRef }: IChatInput) {
     db.collection('rooms').doc(channelId).collection('messages').add({
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      user: 'Sakil Khan',
-      userImage: 'https://avatars.githubusercontent.com/u/44520484?v=4',
+      user: user?.displayName,
+      userImage: user?.photoURL,
     });
 
     chatRef?.current?.scrollIntoView({

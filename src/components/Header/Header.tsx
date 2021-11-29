@@ -4,12 +4,26 @@ import { Avatar } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../firebase/config';
+import { Tooltip } from '@material-ui/core';
 
 function Header() {
+  const [user]: any = useAuthState(auth);
+
   return (
     <HeaderContainer>
       <HeaderLeft>
-        <HeaderAvatar />
+        <Tooltip title="Logout">
+          <HeaderAvatar
+            onClick={() => {
+              auth.signOut();
+            }}
+            src={user?.photoURL}
+          >
+            {user?.displayName}
+          </HeaderAvatar>
+        </Tooltip>
         <AccessTimeIcon />
       </HeaderLeft>
       <HeaderSearch>
