@@ -5,7 +5,7 @@ import db from '../../../firebase/config';
 import firebase from 'firebase';
 
 interface IChatInput {
-  channelName?: string;
+  channelName?: any;
   channelId?: string;
   chatRef?: any;
 }
@@ -22,13 +22,20 @@ function ChatInput({ channelName, channelId, chatRef }: IChatInput) {
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       user: 'Sakil Khan',
-      userImage: '',
+      userImage: 'https://avatars.githubusercontent.com/u/44520484?v=4',
     });
+
+    chatRef?.current?.scrollIntoView({
+      behavior: 'smooth',
+    });
+
+    setInput('');
   };
   return (
     <ChatInputContainer>
       <form>
         <input
+          value={input}
           onChange={(e) => setInput(e.target.value)}
           type="text"
           placeholder={`Message #${channelName}`}
